@@ -111,7 +111,7 @@ program generateIsocontours
   fileUVarProfile = 84
   
   nxy = nnx*nny
-  nt = 10                    ! what is this?
+  nt = 10                    ! number of time steps
 !  nt =  5000
   write(*,*) 'real(nt*nxy) = ', real(nt)*real(nxy)
 
