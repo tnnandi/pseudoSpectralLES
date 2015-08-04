@@ -3,8 +3,8 @@ subroutine nearestPoints(x, y, ixl, ixu, iyl, iyu, wxlyl, wxuyl, wxlyu, wxuyu)
   integer, intent(inout) :: ixl, ixu, iyl, iyu
   double precision, intent(inout) :: wxlyl, wxuyl, wxlyu, wxuyu
   double precision :: wxl, wxu, wyl, wyu
-  integer :: nx = 768, ny=768
-  double precision :: xl=5120.0, yl=5120.0
+  integer :: nx = 768, ny=768       ! Set this according to the ABL mesh resolution
+  double precision :: xl=5120.0, yl=5120.0    ! set this according to the ABL domain size
   double precision :: dx, dy 
   
   dx = xl/dble(nx)
@@ -90,7 +90,7 @@ program generateIsocontours
   integer(kind = 4) :: iErr = 0 !To store the output of each VTK_LIB_IO command
 
   
-  yawAngle = 21.5*3.14159265359/180.0
+  yawAngle = 21.5*3.14159265359/180.0   ! change the yaw angle and the next 4 variables according to the case
   xl = 5120.0
   yl = 5120.0
   nnx = 768
@@ -103,7 +103,7 @@ program generateIsocontours
      xArr(i) = dble(i-1)*dx
      yArr(i) = dble(i-1)*dy
   end do
-  nnz = 50
+  nnz = 50         ! number of vertical planes of data stored
   sizeOfReal = 1
   fileXY = 95
   fileDT = 91
@@ -111,7 +111,7 @@ program generateIsocontours
   fileUVarProfile = 84
   
   nxy = nnx*nny
-  nt = 10
+  nt = 10                    ! what is this?
 !  nt =  5000
   write(*,*) 'real(nt*nxy) = ', real(nt)*real(nxy)
 
@@ -199,7 +199,7 @@ program generateIsocontours
      read(fileDT,'(e15.6,e15.6,I11)') tLESnew, dtLES, itLES
      write(*,*) 'Reading record number ', (fileCounter-1)*nnz + zLevel
      read(fileXY,rec=(fileCounter-1)*nnz + zLevel) pA_xy
-     u = pA_xy(1,:,:) + 7.5
+     u = pA_xy(1,:,:) + 7.5     ! add HALF of geostrophic wind speed (in this case it is 7.5
      v = pA_xy(2,:,:)
      w = pA_xy(3,:,:)
 
